@@ -29,7 +29,7 @@ function App() {
 
     
     return (
-    <div className="App">
+    <div className='App'>
         <h1>String parser</h1>
 
         <div className='wrapper'>
@@ -52,6 +52,10 @@ function App() {
                     defaultValue={ parsedData }
                 />
             </div>
+        </div>
+
+        <div className='footer'>
+            Twinsor LTD &copy; 2022 - <a target='blank' href='https://github.com/twinsorltd/string-parser'>Source Code</a>
         </div>
     </div>
   );
