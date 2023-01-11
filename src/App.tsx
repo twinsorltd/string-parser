@@ -17,12 +17,13 @@ function App() {
 
         const lines = cleanInput.split(/\r?\n/);
 
-        const searchRegex = /(?<=(['"])\b)(?:(?!\1|\\).|\\.)*(?=\1)/g;
+        const searchRegex = /"(.*?[^\\])"/g;
         
         lines.forEach( ( singleLine, index ) => {
             const matchObj = singleLine.match( searchRegex );
             const word = matchObj ? matchObj[1] : '';
-            parsedData = index === 0 ? `${ parsedData }${word}` : `${ parsedData }\n${word}`
+            const unquotedWord = word.replaceAll( '"', '' );
+            parsedData = index === 0 ? `${ parsedData }${unquotedWord}` : `${ parsedData }\n${unquotedWord}`
         } )
 
     }
