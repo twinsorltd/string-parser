@@ -55,7 +55,7 @@ function App() {
         </div>
 
         <div className='footer'>
-            Twinsor LTD &copy; 2022 - <a target='blank' href='https://github.com/twinsorltd/string-parser'>Source Code</a>
+            Twinsor LTD &copy; 2022 - <a href='https://github.com/twinsorltd/string-parser'>Source Code</a>
         </div>
     </div>
   );

@@ -14,3 +14,6 @@ Cranberry
 Total Shiny Black
 Multicoloured (Multicoloured)
 ```
+
+## Live Demo
+Click [here](https://twinsorltd.github.io/string-parser/) to use the utility
