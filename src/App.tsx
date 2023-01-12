@@ -1,31 +1,54 @@
 import React, { useState } from 'react';
 import './App.css';
 
+export const parseData = ( originalText: string ): string => {
+
+    let parsedData = '';
+    let cleanInput = '';
+
+    // cleaning the string from the annoying quotes
+    cleanInput = originalText.replaceAll( '“', '"' );
+    cleanInput = cleanInput.replaceAll( '”', '"' );
+
+
+    // special case A
+    // tackling this case:
+    // Change the product attribute to “["Multicoloured"]” 
+    cleanInput = cleanInput.replaceAll( '"["', '"<<<' );
+    cleanInput = cleanInput.replaceAll( '"]"', '>>>"' );
+
+    const lines = cleanInput.split(/\r?\n/);
+
+    const searchRegex = /"(.*?[^\\])"/g;
+    
+    lines.forEach( ( singleLine, index ) => {
+        const matchObj = singleLine.match( searchRegex );
+        const word = matchObj && matchObj[1] ? matchObj[1] : '';
+
+        let finalword = word;
+
+        if ( finalword ) {
+            // removing the quotes
+            finalword = word.replaceAll( '"', '' );
+            // reconstructing special case A
+            finalword = finalword.replaceAll( '<<<', '["' );
+            finalword = finalword.replaceAll( '>>>', '"]' );
+        }
+
+        parsedData = index === 0 ? `${ parsedData }${finalword}` : `${ parsedData }\n${finalword}`
+    } )
+
+    return parsedData;
+}
+
 function App() {
   
     const [ textInput, setTextInput ] = useState( '' );
-    
+
     let parsedData = '';
 
     if ( textInput ) {
-        
-        let cleanInput = '';
-
-        // cleaning the string from the annoying quotes
-        cleanInput = textInput.replaceAll( '“', '"' );
-        cleanInput = cleanInput.replaceAll( '”', '"' );
-
-        const lines = cleanInput.split(/\r?\n/);
-
-        const searchRegex = /"(.*?[^\\])"/g;
-        
-        lines.forEach( ( singleLine, index ) => {
-            const matchObj = singleLine.match( searchRegex );
-            const word = matchObj ? matchObj[1] : '';
-            const unquotedWord = word.replaceAll( '"', '' );
-            parsedData = index === 0 ? `${ parsedData }${unquotedWord}` : `${ parsedData }\n${unquotedWord}`
-        } )
-
+        parsedData = parseData( textInput );
     }
 
     

@@ -5,6 +5,8 @@
 .wrapper {
   display: grid;
   grid-template-columns: 1fr 1fr;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .textInput {
@@ -15,4 +17,9 @@
 
 .footer {
   margin-top: 40px;
+  font-size: 14px;
+}
+
+.footer a {
+  color: #000;
 }
